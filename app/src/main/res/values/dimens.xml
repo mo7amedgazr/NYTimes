@@ -8,4 +8,6 @@
     <dimen name="dim3">3dp</dimen>
     <dimen name="dim25">25dp</dimen>
     <dimen name="dim30">30dp</dimen>
+    <dimen name="dim200">200dp</dimen>
+    <dimen name="dim100">100dp</dimen>
 </resources>

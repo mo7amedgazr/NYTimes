@@ -9,7 +9,7 @@ data class MostViewedResponse(
 	val copyright: String? = null,
 
 	@field:SerializedName("results")
-	val results: List<ResultsItem?>? = null,
+	val results: List<ResultsItem>? = null,
 
 	@field:SerializedName("num_results")
 	val numResults: Int? = null,

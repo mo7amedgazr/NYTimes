@@ -1,6 +1,7 @@
 package com.test.nytimes.data.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MediaItem(
 
@@ -21,4 +22,4 @@ data class MediaItem(
 
     @field:SerializedName("approved_for_syndication")
 	val approvedForSyndication: Int? = null
-)
+):Serializable

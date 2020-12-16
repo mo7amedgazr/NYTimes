@@ -1,6 +1,7 @@
 package com.test.nytimes.data.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MediaMetadataItem(
 
@@ -15,4 +16,4 @@ data class MediaMetadataItem(
 
 	@field:SerializedName("height")
 	val height: Int? = null
-)
+):Serializable
