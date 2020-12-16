@@ -1,4 +1,4 @@
-# S4MTechnicalTask
+# NYTimes Most Popular
 
 # Code Coverage Report
 Just run the following command in the Terminal Tap : ./gradlew createDebugCoverageReport
