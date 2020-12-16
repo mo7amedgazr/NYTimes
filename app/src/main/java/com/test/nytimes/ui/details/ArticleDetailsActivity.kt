@@ -3,7 +3,6 @@ package com.test.nytimes.ui.details
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.test.nytimes.data.models.ResultsItem
 import com.test.nytimes.databinding.ActivityArticleDetailsBinding
@@ -43,9 +42,6 @@ class ArticleDetailsActivity : BaseActivity() {
         binding.tvCaption.text = resultsItem.media?.get(0)?.caption
         resultsItem.media?.get(0)?.mediaMetadata?.get(0)?.url?.let {
             Glide.with(this).load(it).into(binding.ivImage)
-
         }
-
-
     }
 }
