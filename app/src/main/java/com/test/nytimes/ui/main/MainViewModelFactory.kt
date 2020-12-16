@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.test.nytimes.data.repository.AppRepository
 
-class MainViewModelFactory ( val appRepository: AppRepository) :
+class MainViewModelFactory (private val appRepository: AppRepository) :
     ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")

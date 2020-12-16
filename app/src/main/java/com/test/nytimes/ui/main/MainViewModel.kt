@@ -1,40 +1,32 @@
 package com.test.nytimes.ui.main
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.MediatorLiveData
 import com.test.nytimes.data.network.response.MostViewedResponse
 import com.test.nytimes.data.network.service.SafeApiCall
 import com.test.nytimes.data.repository.AppRepository
 import com.test.nytimes.ui.base.BaseViewModel
 import com.test.nytimes.utils.api_key
 import com.test.nytimes.utils.articlesPeriod
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainViewModel(
     private val appRepository: AppRepository
 ) : BaseViewModel() {
 
-    val mostViewedLiveData = MutableLiveData<MostViewedResponse>()
+    val mostViewedLiveData: MediatorLiveData<MostViewedResponse> =
+        MediatorLiveData<MostViewedResponse>()
 
     fun getMostViewed() {
         showLoading.value = true
-        viewModelScope.launch {
-            val result =
-                withContext(Dispatchers.IO) {
-                    appRepository.getMostViewed(
-                        period = articlesPeriod, api_key = api_key
-                    )
-                }
+        val resultLiveData = appRepository.getMostViewed(
+            period = articlesPeriod, api_key = api_key
+        )
+        mostViewedLiveData.addSource(resultLiveData) {
             showLoading.value = false
-            when (result) {
-                is SafeApiCall.Success -> mostViewedLiveData.value = result.data
-                is SafeApiCall.Error -> showError.value = getErrorMessage(result.exception)
+            if (it is SafeApiCall.Success<*>) {
+                mostViewedLiveData.value = it.data as? MostViewedResponse
+            } else {
+                showError.value = getErrorMessage((resultLiveData.value as SafeApiCall.Error).exception)
             }
         }
     }
-
-
 }

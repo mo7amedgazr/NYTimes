@@ -22,14 +22,13 @@ class BaseViewModelTest {
     @JvmField
     var rule: TestRule = InstantTaskExecutorRule()
 
-    @Before
-    fun setUp() {
-    }
 
     @After
     fun tearDown() {
         clearAllMocks()
     }
+
+
 
     @Test
     fun getErrorMessage_HttpExceptionCode401() {
