@@ -16,24 +16,21 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
 
-class MainActivity : BaseActivity(), KodeinAware {
-
+class MainActivity : BaseActivity<MainViewModel>(MainViewModel::class), KodeinAware {
 
     override val kodein by closestKodein()
     private val mainViewModelFactory: MainViewModelFactory by instance<MainViewModelFactory>()
-    private lateinit var viewModel: MainViewModel
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var articlesAdapter: ArticlesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        initViewModel()
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        initViewModel()
-
     }
 
     private fun initViewModel() {
@@ -44,19 +41,12 @@ class MainActivity : BaseActivity(), KodeinAware {
         viewModel.showLoading.observe(this, Observer { showLoading ->
             binding.progressbar.visibility = if (showLoading) View.VISIBLE else View.GONE
         })
-        viewModel.showError.observe(this, Observer { showError ->
-            if (showError == null)
-                return@Observer
 
-            // handle error here
-            Toast.makeText(this, showError, Toast.LENGTH_LONG).show()
-        })
-
-        viewModel.mostViewedLiveData.observe(this, Observer {
+        (viewModel as MainViewModel).mostViewedLiveData.observe(this, Observer {
             onGetArticles(it)
         })
 
-        viewModel.getMostViewed()
+        (viewModel as MainViewModel).getMostViewed()
     }
 
     private fun onGetArticles(it: MostViewedResponse) {

@@ -3,13 +3,14 @@ package com.test.nytimes.ui.details
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.test.nytimes.data.models.ResultsItem
 import com.test.nytimes.databinding.ActivityArticleDetailsBinding
 import com.test.nytimes.ui.base.BaseActivity
 import com.test.nytimes.utils.INTENT_ARTICLE_ITEM
 
-class ArticleDetailsActivity : BaseActivity() {
+class ArticleDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityArticleDetailsBinding
 

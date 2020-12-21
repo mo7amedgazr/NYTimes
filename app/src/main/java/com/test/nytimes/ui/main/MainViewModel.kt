@@ -1,5 +1,6 @@
 package com.test.nytimes.ui.main
 
+import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import com.test.nytimes.data.network.response.MostViewedResponse
 import com.test.nytimes.data.network.service.SafeApiCall
